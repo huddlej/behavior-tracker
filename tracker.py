@@ -37,6 +37,7 @@ def main(experiment):
             writer.writerow((str(experiment), cmd_map[cmd], now))
 
             if cmd == "e":
+                print "End of experiment %i" % experiment
                 experiment += 1
         except EOFError:
             print "Exiting"
