@@ -25,9 +25,13 @@ def main(experiment):
         try:
             print help
             cmd = raw_input("> ")
-            now = datetime.now()
+            action = cmd_map.get(cmd)
 
-            print cmd_map[cmd], now
+            if action is None:
+                continue
+
+            now = datetime.now()
+            print action, now
             writer.writerow((str(experiment), cmd_map[cmd], now))
 
             if cmd == "e":
