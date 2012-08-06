@@ -11,11 +11,13 @@ def main(experiment):
     writer = csv.writer(fh, delimiter="\t")
 
     cmd_map = {
-        "e": "end",
         "s": "start",
+        "e": "end",
         "w": "wall",
-        "n": "snowberry",
-        "a": "apple"
+        "o": "snowberry_search",
+        "n": "snowberry_rest",
+        "p": "apple_search",
+        "a": "apple_rest"
     }
 
     help = "\n".join(["%s: %s" % (key, value)
