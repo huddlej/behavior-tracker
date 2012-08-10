@@ -1,25 +1,19 @@
 """
 Tool for tracking behavioral actions and timestamping when those actions occur.
 """
+import ConfigParser
 import csv
 from datetime import datetime
 import sys
 
 
-def main(experiment):
+def main(config_file, experiment):
     fh = open("experiments.tab", "a")
     writer = csv.writer(fh, delimiter="\t")
 
-    cmd_map = {
-        "s": "start",
-        "e": "end",
-        "w": "wall",
-        "o": "snowberry_search",
-        "n": "snowberry_rest",
-        "p": "apple_search",
-        "a": "apple_rest"
-    }
-
+    config_parser = ConfigParser.ConfigParser()
+    config_parser.read(config_file)
+    cmd_map = dict(config_parser.items("commands"))
     help = "\n".join(["%s: %s" % (key, value)
                       for key, value in cmd_map.items()])
 
@@ -48,5 +42,6 @@ def main(experiment):
 
 
 if __name__ == "__main__":
+    config_file = "commands.conf"
     experiment = int(sys.argv[1])
-    main(experiment)
+    main(config_file, experiment)
