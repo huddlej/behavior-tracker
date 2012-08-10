@@ -8,7 +8,23 @@ import sys
 
 
 def main(experiment_file, config_file):
-    experiment = 1
+    # Read in the last experiment number from the given file to determine where
+    # to start counting.
+    try:
+        fh = open(experiment_file, "r")
+        reader = csv.reader(fh, delimiter="\t")
+        last_experiment = 0
+        for row in reader:
+            if int(row[0]) > last_experiment:
+                last_experiment = int(row[0])
+
+        experiment = last_experiment + 1
+        fh.close()
+    except IOError:
+        # Default to experiment 1 if the experiments file isn't readable.
+        experiment = 1
+
+    print "Starting with experiment %i" % experiment
 
     fh = open(experiment_file, "a")
     writer = csv.writer(fh, delimiter="\t")
