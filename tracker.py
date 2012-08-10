@@ -7,8 +7,10 @@ from datetime import datetime
 import sys
 
 
-def main(config_file, experiment):
-    fh = open("experiments.tab", "a")
+def main(experiment_file, config_file):
+    experiment = 1
+
+    fh = open(experiment_file, "a")
     writer = csv.writer(fh, delimiter="\t")
 
     config_parser = ConfigParser.ConfigParser()
@@ -47,6 +49,14 @@ def main(config_file, experiment):
 
 
 if __name__ == "__main__":
-    config_file = "commands.conf"
-    experiment = int(sys.argv[1])
-    main(config_file, experiment)
+    if len(sys.argv) != 3:
+        usage = """Usage: %(command)s <experiments file> <commands configuration>
+
+For example: %(command)s experiments.tab commands.conf
+"""
+        sys.stderr.write(usage % {"command": sys.argv[0]})
+        sys.exit(1)
+
+    experiment_file = sys.argv[1]
+    config_file = sys.argv[2]
+    main(experiment_file, config_file)
