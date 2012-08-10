@@ -35,6 +35,7 @@ def main(experiment):
             now = datetime.now()
             print action, now
             writer.writerow((str(experiment), cmd_map[cmd], now))
+            fh.flush()
 
             if cmd == "e":
                 print "End of experiment %i" % experiment
