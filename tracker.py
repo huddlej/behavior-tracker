@@ -27,6 +27,11 @@ def main(config_file, experiment):
                 continue
 
             now = datetime.now()
+
+            # Let the user know what happened by writing to stdout, write the
+            # official record to the experiments file, and flush the file handle
+            # I/O to prevent any data from being lost if the program should
+            # crash during an experiment.
             print action, now
             writer.writerow((str(experiment), cmd_map[cmd], now))
             fh.flush()
