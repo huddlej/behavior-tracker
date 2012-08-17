@@ -24,7 +24,8 @@ def main(experiment_file, config_file):
         fh.close()
     except IOError:
         # Default to experiment 1 if the experiments file isn't readable.
-        experiment = 1
+        experiment = raw_input("start with experiment: ")
+        experiment = int(experiment)
 
     print "Starting with experiment %i" % experiment
 
